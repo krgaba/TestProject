@@ -11,7 +11,11 @@ public class HomePage {
     
     
     
-    public HomePage(WebDriver driver){
+//    public HomePage(WebDriver driver){
+//        this.driver = driver;
+//    }
+    
+    public void setDriver (WebDriver driver){
         this.driver = driver;
     }
     
