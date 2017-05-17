@@ -17,7 +17,7 @@ public class FirstSeleniumTest {
     
     @BeforeTest
     public void setup(){
-        System.setProperty("webdriver.chrome.driver", "/Users/gabkh01/dev/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "/Users/Humza/Desktop/JAVA/jar/chromedriver_win32/chromedriver");
         driver = new ChromeDriver();
         
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);

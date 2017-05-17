@@ -24,12 +24,12 @@ public class SecondSeleniumTest {
     
     @BeforeTest
     public void setup(){
-        System.setProperty("webdriver.chrome.driver", "/Users/gabkh01/dev/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Humza\\Desktop\\JAVA\\jar\\chromedriver_win32\\chromedriver.exe");
         driver = new ChromeDriver();
         
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     
-        driver.get("http://localhost:8080/SpringBootCRUDApp");
+        driver.get("http://localhost:8080/TestApp");
     }
     
     @Test
@@ -39,12 +39,15 @@ public class SecondSeleniumTest {
         
         //validate Title page
         String pageTitle = userPage.getPageTitle();
-        Assert.assertEquals(pageTitle, "CRUD Example");
+        Assert.assertEquals(pageTitle, "Test App");
         
         //Setting name
         Assert.assertEquals(userPage.getName(), "");
         userPage.setName("Andy Bee");
         Assert.assertEquals(userPage.getName(), "Andy Bee");
+        
+        // Setting Salary
+        userPage.setSalary("$" + 30000);
         
     }
     

@@ -32,7 +32,9 @@ public class UserPage {
     }
     
     
-    public void setSalary(int salary){
+    public void setSalary(String salary){
+    	
+    	driver.findElement(By.xpath(".//input[@ng-model=\"ctrl.user.salary\"]")).sendKeys(salary);
         
     }
     
