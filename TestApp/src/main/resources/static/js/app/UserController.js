@@ -80,6 +80,7 @@ angular.module('crudApp').controller('UserController',
                 .then(
                     function(){
                         console.log('User '+id + ' removed successfully');
+                        self.successMessage='User deleted successfully';
                     },
                     function(errResponse){
                         console.error('Error while removing user '+id +', Error :'+errResponse.data);
