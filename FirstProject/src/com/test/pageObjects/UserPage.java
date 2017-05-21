@@ -59,6 +59,10 @@ public class UserPage {
         driver.findElement(By.xpath(".//button[@ng-click=\"ctrl.editUser(u.id)\"]")).click();
     }
     
+    public void clickRemove(){
+        driver.findElement(By.xpath(".//button[@ng-click=\"ctrl.removeUser(u.id)\"]")).click();
+    }
+    
     
     
 
