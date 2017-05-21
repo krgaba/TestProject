@@ -1,177 +1,65 @@
 
 package com.test.main;
 
-import org.testng.TestNG;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
 
-import com.test.basic.FirstBasicTest;
-import com.test.model.Animal;
-import com.test.model.BankAccount;
-import com.test.model.Bird;
+import org.testng.TestNG;
 
 public class Main {
 
     /**
      * @param args
+     * @throws IOException 
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        
+        
+        Properties prop = new Properties();
 
-//        int a = 10;
-//        char c = 'c';
-//        String test = "Hello";
-//        double decimal = 3.1;
-//        boolean isMore = false;
-//        String hello = "Hello";
-//        String world = "World";
-////        arrayTest();
-//        Test test1 = new Test();
-//        Test test2 = new Test();
-//        
-//        Person faisal = new Person("Faisal", "Gaba", "lots");
-//        faisal.setFirstName("Khuram");
-//        Person humza = new Person("Humza", "Ganatara", "male");
-//        Person salah = new Person();
-//        System.out.println("calculator = " + Test.calculator(14, 7, "minus"));
-//      System.out.println("boolean test " + simple("yes"));
-//        System.out.println("a + b = " + add(a,210));
-//        System.out.println("a - b = " + subtract(a,210));
-//        System.out.println("decimal + decimal = " + addDecimal(decimal, decimal));
-//        System.out.println("addString = " + addString(hello, world));
-//        System.out.println("booleanTest = " + booleanTest(20));
-        
-//        System.out.println(multiplyByTwo(10));
-           
-//        BankAccount savingAccount = new BankAccount("123-23-2345", 400);
-//        savingAccount.setAccountName("Humza Ganatara");
-//        savingAccount.setAccountType("Savings");
-//        
-//        savingAccount.printAccountInfo();
-        
-//        Animal mockingBird = new Animal("blue", 2, true);
-//        mockingBird.printInfo();
-        
-//        Animal mockingBird = new Bird("yellow", 2, "blue");
-//        mockingBird.printInfo();
-//        
-//        Animal lion = new Animal("yellow", 2, false);
-//        lion.printInfo();
-        
-        
-        TestNG test = new TestNG();
-        test.setTestClasses(new Class[] { FirstBasicTest.class });
-        test.run();
-        
-        
-        
-        
+        //Use System.getProperty to get the relative path of file in Workspace. Now file path is machine independent.
+        String path = System.getProperty("user.dir") + "/src/resources/configuration.properties";
+//        System.out.println("Actual Location of File -> " + path);
 
-    }
-    public static int add(int w, int z){
-        return w + z ;
-    }
-    public static double addDecimal(double w, double z){
-        return w + z ;
-    }
 
-    public static int subtract(int w, int z){
-        return w - z ;
-    }
-    
-    public static String addString(String str1, String str2){
-        String blah = " :) ";
-        return str1 + blah + str2;
-    }
-    
-    
-    public static String booleanTest(int i){
+        //Create FileInputStream object of Config/data file
+        FileInputStream fs= new FileInputStream(path);
+
+        // Pass fs object to load method of Properties object
+
+        prop.load(fs);
+
+        // Use getProperty method of Properties object to get the values.
+
+//        System.out.println(prop.getProperty("chrome.driver"));
+        String chromeDriverLocation = prop.getProperty("chrome.driver");
         
-        if(i > 10){
-            return "more";
-        }
-        else if(i < 10){
-            return "less";
+        if(System.getProperty("os.name").indexOf("Mac") >= 0){
+            chromeDriverLocation += "/chromedriver";
         }
         else{
-            
-            return "equal"; 
+            chromeDriverLocation += "/chromedriver.exe";
         }
+        System.out.println(chromeDriverLocation);
+        System.setProperty("webdriver.chrome.driver", chromeDriverLocation);
         
+        String suiteXml = System.getProperty("user.dir") + "/src/resources/testng.xml";
+        
+        TestNG test = new TestNG();
+        
+        List<String> suitefiles=new ArrayList<String>();
+        suitefiles.add(suiteXml);
+        
+        test.setTestSuites(suitefiles);
+//        test.setTestClasses(new Class[] { SecondSeleniumTest.class });
+        test.run();
+        
+         
+
     }
-    
-    public static int multiplyByTwo(int num){
-        return num * 2;
-    }
-   
-    
-  public static int simple(String word){
-      
-      if(word.equals("yes")){
-         return 1; 
-      }
-      else{
-          return 0;
-      }
-      
-  }
-  
-//  public static int calculator(int num1, int num2, String sign){
-//
-//      if(sign.equals("add")){
-//          return num1 + num2;
-//      }
-//      
-//      if(sign.equals("minus")){
-//          return num1 - num2;
-//      }
-//      
-//      if(sign.equals("multiply")){
-//          return num1 * num2;
-//      }
-//      
-//      if(sign.equals("divide")){
-//          return num1/num2;
-//      }
-//      else{
-//          return 0;
-//      }
-//  }
-  
-  
-  public static void arrayTest(){
-      
-      int [] intArray = new int[4];
-      
-      intArray[0] = 6;
-      intArray[1] = 12;
-      intArray[2] = 62;
-      intArray[3] = 62;
-      
-      
-      
-      for(int i = 0; i < intArray.length; i++){
-          
-          if(intArray[i] == 6){
-              System.out.println("Found 6 on index= " + i);
-          }
-//          System.out.println(intArray[i]);
-      }
-      
-//      int counter = 0;
-//      while(counter < intArray.length){
-//          
-//          System.out.println(intArray[counter]);
-//          counter ++;
-//          
-//      }
-//               
-      
-      
-//      System.out.println(intArray[0]);
-//      System.out.println(intArray[1]);
-//      System.out.println(intArray[2]);
-      
-      
-      
-  }
    
 
 

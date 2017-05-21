@@ -20,6 +20,7 @@ public class UserPage {
     }
     
     public void setName(String name){
+        driver.findElement(By.xpath(".//input[@ng-model=\"ctrl.user.name\"]")).clear();
         driver.findElement(By.xpath(".//input[@ng-model=\"ctrl.user.name\"]")).sendKeys(name);
     }
     
@@ -39,11 +40,23 @@ public class UserPage {
     }
     
     public void clickAddButton(){
-        
+        driver.findElement(By.xpath("//input[@type=\"submit\"]")).click();
+    }
+    
+    public void clickUpdateButton(){
+        driver.findElement(By.xpath("//input[@type=\"submit\"]")).click();
     }
     
     public String getNameUsersList(){
         return "Khuram";
+    }
+    
+    public String getMessage(){
+        return driver.findElement(By.xpath("//div[contains(@class, 'alert')]")).getText();
+    }
+    
+    public void clickEdit(){
+        driver.findElement(By.xpath(".//button[@ng-click=\"ctrl.editUser(u.id)\"]")).click();
     }
     
     
